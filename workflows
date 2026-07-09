@@ -1,0 +1,43 @@
+name: Build PCADIB OS ISO
+
+on:
+  workflow_dispatch: {}
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Free up disk space
+        run: |
+          sudo rm -rf /usr/share/dotnet /opt/ghc /usr/local/share/boost "$AGENT_TOOLSDIRECTORY"
+          sudo apt-get clean
+
+      - name: Install live-build dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y live-build live-config live-boot debootstrap \
+            syslinux-utils squashfs-tools xorriso isolinux git rsync
+
+      - name: Run PCADIB OS build script
+        run: |
+          chmod +x build.sh
+          sudo bash build.sh
+
+      - name: Locate generated ISO
+        id: find_iso
+        run: |
+          ISO_PATH=$(find . -maxdepth 1 -name "pcadib-os-*.iso" | head -n1)
+          echo "iso_path=$ISO_PATH" >> "$GITHUB_OUTPUT"
+          ls -lh "$ISO_PATH"
+
+      - name: Upload ISO as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: pcadib-os-iso
+          path: ${{ steps.find_iso.outputs.iso_path }}
+          retention-days: 14
