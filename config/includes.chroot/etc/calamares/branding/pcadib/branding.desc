@@ -1,0 +1,30 @@
+componentName: pcadib
+
+welcomeStyleCalamares: true
+welcomeExpandingLogo: true
+
+strings:
+    productName:         "PCADIB OS"
+    shortProductName:    "PCADIB"
+    version:             "1.0"
+    shortVersion:        "1.0"
+    versionedName:       "PCADIB OS 1.0 (Nova)"
+    shortVersionedName:  "PCADIB 1.0"
+    bootloaderEntryName: "PCADIB OS"
+    productUrl:          "https://example.com/pcadib-os"
+    supportUrl:          "https://example.com/pcadib-os/support"
+    knownIssuesUrl:      "https://example.com/pcadib-os/issues"
+    releaseNotesUrl:     "https://example.com/pcadib-os/release-notes"
+
+images:
+    productLogo:         "logo.png"
+    productIcon:         "logo.png"
+    productWallpaper:    "wallpaper.png"
+
+slideshow: "show.qml"
+
+style:
+   sidebarBackground:    "#1B2733"
+   sidebarText:          "#FFFFFF"
+   sidebarBackgroundSelected: "#2F80ED"
+   sidebarTextSelected:  "#FFFFFF"
