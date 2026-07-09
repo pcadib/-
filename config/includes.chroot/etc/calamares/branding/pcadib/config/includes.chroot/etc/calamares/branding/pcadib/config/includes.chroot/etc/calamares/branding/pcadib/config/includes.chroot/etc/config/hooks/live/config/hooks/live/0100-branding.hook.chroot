@@ -1,0 +1,35 @@
+#!/bin/sh
+set -e
+
+echo "pcadib-os" > /etc/hostname
+
+cat > /etc/issue <<'EOF'
+PCADIB OS 1.0 (Nova) \n \l
+
+EOF
+
+cat > /etc/motd <<'EOF'
+========================================
+   به PCADIB OS خوش آمدید
+   یک سیستم‌عامل مبتنی بر Debian
+   با پشتیبانی از اجرای برنامه‌های ویندوز
+========================================
+EOF
+
+mkdir -p /etc/xdg/xfce4/xfconf/xfce-perchannel-xml
+cat > /etc/xdg/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml <<'EOF'
+<?xml version="1.0" encoding="UTF-8"?>
+<channel name="xfce4-desktop" version="1.0">
+  <property name="backdrop" type="empty">
+    <property name="screen0" type="empty">
+      <property name="monitor0" type="empty">
+        <property name="workspace0" type="empty">
+          <property name="last-image" type="string" value="/usr/share/backgrounds/pcadib/pcadib-wallpaper.png"/>
+        </property>
+      </property>
+    </property>
+  </property>
+</channel>
+EOF
+
+echo "[Branding hook] PCADIB OS branding applied."
